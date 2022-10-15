@@ -5,8 +5,9 @@ The data is parsed and converted to machine readable format, in order to be pres
 ![screenshot of the web application](screenshot.png)
 
 ## Requirements
-- python (>3.7)
+- python (>3.9)
 - lxml
+- requests
 
 ## Installation
 
