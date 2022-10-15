@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="sv-se">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="utils.js"></script>
+        <link rel="stylesheet" href="index.css">
+        <title>Skridskoåkning i Stockholm</title>
+    </head>
+    <body>
+        <h1>⛸️ i Stockholm</h1>
+        <p class="subheading">
+            Här hittar du en schema med öppettider för skridskoåkningsplatser i Stockholm Stad.
+        </p>
+        <header>
+            <nav>
+                <select id="place"></select>
+    
+                <div class="dateseeker">
+                    <button onclick="week_previous()">&lt;</button>
+                    <span id="week_indicator"></span>
+                    <button onclick="week_next()">&gt;</button>
+                </div>
+            </nav>
+
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+                <span></span>
+            </div>
+        </header>
+        <main>
+            <div id="overlay_noevents">
+                <h2>Inga öppettider denna vecka</h2>
+            </div>
+            <div id="calendar_container"></div>
+        </main>
+        <p class="legend">
+            <i class="legend_med"></i> med klubba
+            <i class="legend_utan"></i> utan klubba
+            <i class="legend_delad"></i> delad is
+        </p>
+        <footer>
+            <p>
+                Tillverkad med ❤️ av Gabin | Data från 
+                <a href="https://motionera.stockholm/skridskoakning/">motionera.stockholm</a>,
+                koden finns på <a href="https://github.com/gabin-s/">GitHub</a>.
+            </p>
+        </footer>
+        <script src="index.js"></script>
+    </body>
+</html>

@@ -1,0 +1,121 @@
+body {
+    text-align: center;
+    font-family: "Helvetica", Arial, sans-serif;
+}
+
+.subheading {
+    margin-left: auto;
+    margin-right: auto;
+    font-style: italic;
+}
+
+#calendar_container {
+    display: flex;
+    overflow-x: auto;
+
+    padding: 10px;
+}
+
+/* container of day tag + event_container */
+.column { 
+    display: inline-block;
+}
+.column:not(:last-child) { margin-right: 5px; }
+.column > span {
+    display: block;
+    margin-bottom: 7px;
+}
+
+.event_container {
+    position: relative;
+    display: inline-block;
+    height: 400px;
+    width: 100px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+/* a single event */
+.event {
+    padding: 5px;
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 0.9em;
+}
+
+/* contains the calendar, and the overlay */
+main {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    width: fit-content;
+}
+
+/* overlay when no event are shown */
+#overlay_noevents {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    color: white;
+}
+
+.alert {
+    display: none;
+    padding: 10px;
+    border: 1px solid rgb(102, 29, 29);
+    border-radius: 5px;
+    background-color: rgb(222, 86, 86);
+    color: white;
+    margin-bottom: 10px;
+
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 15px;
+    cursor: pointer;
+}
+
+.dateseeker {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+footer {
+    color: grey;
+    font-size: small
+}
+footer a {
+    text-decoration: none;
+    font-style: italic;
+    color: inherit;
+}
+
+.legend_delad   { 
+    background: repeating-linear-gradient(45deg,
+        #73a270,#73a270 10px,
+        #bb6464 10px,#bb6464 20px );
+}
+.legend_med     { background-color: #bb6464; }
+.legend_utan    { background-color: #73a270; }
+.legend_default { background-color: #cdc7be;}
+
+.legend > i {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 1px solid grey;
+    border-radius: 2px;
+    vertical-align: middle;
+}
