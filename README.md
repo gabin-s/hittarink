@@ -1,4 +1,4 @@
-# Skridskoåkning i Stockholmstad
+# Skridskoåkning i Stockholm stad
 This repository contains code to retrieve schedule for ice skating areas in Stockholm City.
 The data is parsed and converted to machine readable format, in order to be presented as a simple website.
 
