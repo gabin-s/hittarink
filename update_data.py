@@ -9,6 +9,9 @@ import logging
 import os.path
 import sys
 import argparse
+
+import urllib3
+
 from zoneinfo import ZoneInfo
 
 from constants import *
@@ -182,18 +185,19 @@ if __name__ == '__main__':
 
     # get data from Stockholm stad
     try:
-        res = requests.get(url)
-    except requests.exceptions.RequestException as e:
+        http = urllib3.PoolManager()
+        res = http.request('GET', url)
+    except urllib3.exceptions.HTTPError as e:
         eprint(e)
         exit(1)
 
-    if res.status_code != 200:
-        eprint(f"unable to fetch data: HTTP {res.status_code}")
+    if res.status != 200:
+        eprint(f"unable to fetch data: HTTP {res.status}")
         exit(1)
 
     logging.debug('fetched page')
 
-    parsed = lxml.html.document_fromstring(res.text)
+    parsed = lxml.html.document_fromstring(res.data.decode('utf-8'))
 
     # 1 - find buttons matching accordion header
     candidates = find_candidates_btn(parsed)
