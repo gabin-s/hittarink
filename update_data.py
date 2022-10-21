@@ -63,31 +63,36 @@ def parse_btns(btns, capture_date):
         yield monday, list(parse_accordion(accordion, monday_dt))
 
 def parse_accordion(accordion, monday):
-    current_place    = None
-    current_subplace = None
+    first_h  = None
+    second_h = None
     
-    # patch a wrongly tagged title (h3 for subplace)
-    li_found = True
+    # we found the end of the block (one place)
+    end_found = True
 
     for node in accordion:
-        if node.tag == 'h3' and li_found:
-            current_place    = node.text.strip(',')
-            current_subplace = None
-            li_found = False
-        elif node.tag == 'h4' or (node.tag == 'h3' and not li_found):
-            current_subplace = node.text
-            li_found = False
-        elif node.tag == 'ul' and current_place is not None:
-            li_found = True
+        if node.tag == 'h3' or node.tag == 'h4':
+            if end_found:
+                first_h   = node.text.strip(',')
+                end_found = False
+            else:
+                second_h = node.text.strip(',')
+
+        elif node.tag == 'ul' and first_h is not None:
+            place    = first_h
+            subplace = second_h
 
             # correct eventual mistakes in place/subplace name
-            id_place = \
-                get_place_id(current_place, current_subplace)
+            id_place = get_place_id(place, subplace)
 
             for li in node.findall('li'):
                 l = parse_li(li.text, monday)
-                f = lambda e: (id_place, *e)
-                yield from map(f, l)
+                yield from [(id_place, *e) for e in l]
+
+        elif node.tag == 'p' and 'arrow-link' in node.classes:
+            first_h  = None
+            second_h = None
+
+            end_found = True
 
 def parse_li(t, monday):
     day, rest = re.split(r'\W+', t, 1)
