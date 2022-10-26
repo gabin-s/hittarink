@@ -14,8 +14,7 @@ function getMonday(d) {
 }
 
 function getDayName(i) {
-    const d = new Date()
-    d.setDate(-d.getDay() + i + 1)
+    const d = new Date(Date.UTC(2022, 10, 14+i))
     return d.toLocaleString(LOCALE, { weekday: "long" })
 }
 
